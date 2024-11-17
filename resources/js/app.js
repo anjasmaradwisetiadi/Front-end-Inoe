@@ -4,6 +4,8 @@ import App from './App.vue';
 import axios from 'axios';
 import mitt from 'mitt';
 import router from './router';
+import { createPinia } from 'pinia';
+
 import 'material-symbols';
 import '../css/app.css';
 import '../sass/app.scss';
@@ -14,4 +16,5 @@ app.config.globalProperties.$axios = axios;
 app.config.globalProperties.emitter = emitter;
 
 app.use(router);
+app.use(createPinia());
 app.mount('#app');

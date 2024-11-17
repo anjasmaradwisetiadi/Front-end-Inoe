@@ -142,12 +142,6 @@ const emit = defineEmits([
 ]);
 
 onBeforeMount(()=>{
-  // change to emiiter
-  // this.$eventBus.$on('closeSelectFilter', () => {
-  //   visibleDropdown.value = false;
-  // });
-  // 
-
   const valueVisibleDropdown = false;
   visibleDropdown.value = valueVisibleDropdown;
     
@@ -156,8 +150,6 @@ onBeforeMount(()=>{
 
 function onHandleVisibleDropdown () {
   if (!visibleDropdown.value) {
-    // change to emiiter
-    // this.$eventBus.$emit('closeSelectFilter');
 
     emitter.on('closeSelectFilter');
     visibleDropdown.value = true;

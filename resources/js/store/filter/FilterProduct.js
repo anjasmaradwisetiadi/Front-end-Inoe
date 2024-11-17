@@ -1,9 +1,13 @@
 import { defineStore } from 'pinia';
 
-export const useCouponStore = defineStore('coupon', {
+export const useFilterProductStore = defineStore('filterProduct', {
   state: () =>{
     return {
-      loading: false
+      loading: false,
+      filterOptionsProductType: [],
+      selectedFilterProductType: 'Sandscreen',
+      selectedFilterSize: '30',
+      selectedFilterConnection: 'Conductor'
     };
   },
 
