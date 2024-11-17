@@ -57,8 +57,8 @@ mix.setPublicPath('public');
 mix.js('resources/js/app.js', 'public/js')
   .vue()
   .sass('resources/sass/app.scss', 'public/css')
-  .postCss("resources/css/app.css", "public/css", [
-    require("tailwindcss"),
-  ]);
+  .postCss('resources/css/app.css', 'public/css', [
+    require('tailwindcss')
+  ])
   .copy('./node_modules/material-symbols/index.scss', 'public/css/material-symbols.min.css')
   .sourceMaps();
