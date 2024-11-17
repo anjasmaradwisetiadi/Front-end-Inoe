@@ -10,10 +10,10 @@
         @click="onHandleVisibleDropdown"
       >
         <span>{{ props?.title }} </span>
-        <FontAwesomeIcon
-          class="text-sm text-yellow-600"
-          :icon="(visibleDropdown ? 'chevron-up' : 'chevron-down')"
-        />
+
+        <span class="material-symbols-outlined text-yellow-600">
+          {{ visibleDropdown ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+        </span>
       </div>
   
       <div class="w-full text-left">
@@ -25,10 +25,9 @@
             <span class="font-bold text-yellow-600">
               {{ props?.selectedValue }}
             </span>
-            <FontAwesomeIcon
-              class="text-sm text-gray-500"
-              icon="times-circle"
-            />
+            <span class="material-symbols-outlined text-gray-500">
+              cancel
+            </span>
           </div>
         </template>
         <template v-else>
@@ -60,10 +59,9 @@
   
         <div class="relative">
           <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-            <FontAwesomeIcon
-              class="text-sm text-gray-500"
-              icon="search"
-            />
+            <span class="material-symbols-outlined text-gray-500">
+              search
+            </span>
           </div>
           <input
             v-model="searchValue"

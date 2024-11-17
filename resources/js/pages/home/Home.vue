@@ -12,6 +12,9 @@
               title="Product Type"
               :selected-value="selectedFilterProductType"
               :options="filterOptionsProductType"
+              @onSelectData="onHandleSelectdata($event)"
+              @onResetData="onHandleResetdata($event)"
+              @filterListItem="onHandleFilterListItem($event)"
             />
           </div>
         </div>
@@ -40,4 +43,21 @@ const filterOptionsProductType = [
     total_qty: 2049779
   }
 ];
+
+
+function onHandleSelectdata (event){
+  console.log('onHandleSelectdata = ');
+  console.log(event);
+}
+function onHandleResetdata (event){
+  console.log('onHandleResetdata = ');
+  console.log(event);
+}
+
+
+function onHandleFilterListItem (event){
+  console.log('onHandleFilterListItem = ');
+  console.log(event);
+}
+
 </script>
