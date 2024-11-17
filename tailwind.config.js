@@ -5,7 +5,8 @@ module.exports = {
     './resources/**/*.{js,ts,jsx,tsx}',
     './node_modules/flowbite-vue/**/*.{js,jsx,ts,tsx,vue}',
     './node_modules/flowbite/**/*.{js,jsx,ts,tsx}',
-    './resources/**/*.blade.php'
+    './resources/**/*.blade.php',
+    './resources/**/*.php'
   ],
   theme: {
     extend: {

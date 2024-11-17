@@ -43,6 +43,10 @@ mix
           exclude: /node_modules/,
           loader: 'eslint-loader',
           test: /\.(js|vue)?$/
+        },
+        {
+          test: /\.scss$/,
+          loader: 'sass-loader'
         }
       ]
     }
@@ -53,9 +57,8 @@ mix.setPublicPath('public');
 mix.js('resources/js/app.js', 'public/js')
   .vue()
   .sass('resources/sass/app.scss', 'public/css')
-  .options({
-    postCss: [
-      tailwindcss('./tailwind.config.js')
-    ]
-  })
+  .postCss("resources/css/app.css", "public/css", [
+    require("tailwindcss"),
+  ]);
+  .copy('./node_modules/material-symbols/index.scss', 'public/css/material-symbols.min.css')
   .sourceMaps();

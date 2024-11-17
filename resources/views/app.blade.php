@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <title>{{env('APP_NAME')}}</title>
-    <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet"/>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="/path/to/material-symbols/index.css" rel="stylesheet" name="call material">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
     @if (Auth::check())

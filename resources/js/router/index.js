@@ -1,10 +1,10 @@
 
 import { createWebHistory, createRouter } from 'vue-router';
 
-import Home from '../pages/Home.vue';
+import Home from '../pages/Home/Home.vue';
 // import Register from '../pages/Register';
 // import Login from '../pages/Login';
-import Dashboard from '../pages/Dashboard.vue';
+import Dashboard from '../pages/dashboard/Dashboard.vue';
 // import Posts from '../components/Posts';
 // import EditPost from '../components/EditPost';
 // import AddPost from '../components/AddPost';
