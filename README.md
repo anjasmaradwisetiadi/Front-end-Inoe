@@ -1,3 +1,33 @@
-Laravel video tutorials for beginner step by step available on https://www.youtube.com/channel/UCcX53DDXYR4Tlt2MucdxOkQ
+# Frontend Engineer Test
 
-Laravel Vue js tutorials for beginner step by step available on https://youtube.com/playlist?list=PL74Mcm6qZK9_vaTS2OuqU8qn7F6foG6Xg
+### Technologies Stack 
+- PHP 9
+- Laravel v.8
+- Node.js > v.v14.22.12
+- Vue 3
+- Pinia
+- TailwindCSS
+- Flowbite
+- Jest
+- Vue Test Utils
+
+### How to Install Backend
+- please copy file .env.example, then rename become .env
+- $ composer install
+- $ php artisan key:generate
+
+### For runing APP Laravel 
+- $ php artisan serve
+
+### How to Install Frontend
+- $ npm install | yarn install 
+
+### For runing APP Vue
+- $ npm run watch
+
+### For build APP Vue
+- $ npm run dev
+
+### How to run unit test jest
+- $ npm run test
+
