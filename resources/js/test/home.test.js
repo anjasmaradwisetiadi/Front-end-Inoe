@@ -18,11 +18,24 @@ describe('Testing Page Home ', () => {
   });
 
   describe('Component Filter', () => {
+    const wrapper = shallowMount(Filter);
 
     it('Display Component Filters renders', () => {
-      const wrapper = shallowMount(Filter);
       expect(wrapper.find('#filter-component').exists()).toBe(true); // Memastikan elemen utama ada
     });
+
+    it('Display Component Filters Category 1 renders', async () => {
+      await expect(wrapper.find("[data-test-id='filter-component-1']").exists()).toBe(true); // Memastikan elemen utama ada
+    });
+  
+
+    it('Click Button Filter', async () => {
+      const buttonClick =  wrapper.find("[data-test-id='click-handle']");
+    //   await buttonClick.trigger('click');
+    //   // Pastikan handleClick dipanggil
+    //   expect(wrapper.vm.message).toBe('Button clicked!');
+    });
+  
   });
 
   describe('Component Explanation', () => {
