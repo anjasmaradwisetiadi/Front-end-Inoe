@@ -86,7 +86,7 @@
           Shell My Pipes
         </button>
         <button class="bg-[#fe6602] text-white border border-gray-100 rounded-lg py-1 px-4">
-          enquire Now
+          Enquire Now
         </button>
       </div>
     </div>

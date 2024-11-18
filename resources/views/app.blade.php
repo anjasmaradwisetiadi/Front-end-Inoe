@@ -7,6 +7,7 @@
     <title>{{env('APP_NAME')}}</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="/path/to/material-symbols/index.css" rel="stylesheet" name="call material">
+    <link rel="icon" sizes="16x16 24x24 32x32 48x48 64x64" href="images/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>

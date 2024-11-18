@@ -1,25 +1,20 @@
 
 import { createWebHistory, createRouter } from 'vue-router';
 
-import Home from '../pages/Home/Home.vue';
-// import Register from '../pages/Register';
-// import Login from '../pages/Login';
-import Dashboard from '../pages/dashboard/Dashboard.vue';
-// import Posts from '../components/Posts';
-// import EditPost from '../components/EditPost';
-// import AddPost from '../components/AddPost';
+// import Home from '../pages/Home/Home.vue';
 
 export const routes = [
   {
     name: 'home',
     path: '/',
-    component: Home
+    component: () => import('../pages/Home/Home.vue')
   },
   {
     name: 'dashboard',
     path: '/dashboard',
-    component: Dashboard
-  }
+    component: () => import('../pages/Home/Home.vue')
+  },
+  { path: '/:pathMatch(.*)*', component: () => import('@components/PageNotFound.vue') }
 ];
 
 const router = createRouter({

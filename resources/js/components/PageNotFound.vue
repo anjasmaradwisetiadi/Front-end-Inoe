@@ -2,11 +2,11 @@
   <div id="PageNotFound">
     <div class="page-not-found">
       <div class="text-center">
-        <h3>Page Not Found</h3>
+        <h3 class="text-5xl font-bold mb-8">Page Not Found</h3>
         <div class="col d-flex justify-content-center">
           <button
             type="button"
-            class="button-style-secondary"
+            class="bg-[#fe6602] text-white border border-gray-100 rounded-lg py-1 px-4"
             @click="backRoute()"
           >
             Kembali

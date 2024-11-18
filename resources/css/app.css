@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.invalid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: .25rem;
+    font-size: .9rem;
+    color: #dc3545;
+}
+
+.blur-background{
+    background-color: rgba(0, 0, 0, 0.15);
+}

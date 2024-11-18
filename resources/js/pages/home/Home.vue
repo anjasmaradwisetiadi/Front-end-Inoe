@@ -47,9 +47,9 @@
     </section>
     <Explanation />
     <FormQuestion />
-    <!-- <template v-if="getLoading">
+    <template v-if="getLoading">
       <Loading />
-    </template> -->
+    </template>
   </div>
 </template>
 <script setup>
@@ -71,6 +71,7 @@ onMounted(()=>{
 });
 
 const getLoading = ref(false);
+const debounce = ref(null);
 
 const selectedFilterProductType = computed(()=>{
   return filterProductStore.selectedFilterProductType;
@@ -119,11 +120,11 @@ const getAllProduct = async () => {
 
 const initialize = async (withLoader = false)=> {
   const res = await getAllProduct();
-
   if (withLoader) {
-    await setTimeout(() => {
+    clearTimeout(debounce.value);
+    debounce.value = setTimeout(() => {
       // console.log('masuk sini timeout = ');
-      // getLoading.value = true;
+      getLoading.value = true;
     }, 1000);
   }
   
