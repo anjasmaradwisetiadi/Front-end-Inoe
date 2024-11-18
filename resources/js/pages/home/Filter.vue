@@ -132,9 +132,7 @@
 <script setup>
 import { ref, defineEmits, defineProps, onBeforeMount } from 'vue';
 import { utilize } from '../../utilize/index';
-import useEmitter from '../../utilize/useEventBus';
 
-const emitter = useEmitter();
 const visibleDropdown = ref(false); 
 const searchValue = ref('');
 const debounce = ref(null);
@@ -169,14 +167,10 @@ const emit = defineEmits([
 onBeforeMount(()=>{
   const valueVisibleDropdown = false;
   visibleDropdown.value = valueVisibleDropdown;
-    
-  emitter.emit('toggle-sidebar', valueVisibleDropdown);
 });
 
 function onHandleVisibleDropdown () {
   if (!visibleDropdown.value) {
-
-    emitter.on('closeSelectFilter');
     visibleDropdown.value = true;
   }
   else {

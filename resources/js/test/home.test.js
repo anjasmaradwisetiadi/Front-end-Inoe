@@ -5,8 +5,6 @@ import Explanation from '../pages/Home/Explanation.vue';
 import FormQuestion from '../pages/Home/FormQuestion.vue';
 import Filter from '../pages/Home/Filter.vue';
 import { shallowMount , mount } from '@vue/test-utils';
-import useEmitter from '../utilize/useEventBus';
-const emitter = useEmitter();
 
 describe('Testing Page Home ', () => {
     
@@ -19,28 +17,13 @@ describe('Testing Page Home ', () => {
     });
   });
 
-//   describe('Component Filter', () => {
-// 
-//     beforeEach(() => {
-//       expect.spyOn(emitter, 'emit').mockImplementation(() => {}); // Mock fungsi emit
-//     });
-//     
-//     afterEach(() => {
-//       expect.restoreAllMocks(); // Kembalikan fungsi asli setelah setiap tes
-//     });
-// 
-//     it('should not throw error when emit is called', () => {
-//       // Tes tanpa error saat emit dipanggil
-//       expect(() => {
-//         emitter.emit('toggle-sidebar', true);
-//       }).not.toThrow();
-//     });
-// 
-//     it('Display Component Filters renders', () => {
-//       const wrapper = shallowMount(Filter);
-//       expect(wrapper.find('#filter-component').exists()).toBe(true); // Memastikan elemen utama ada
-//     });
-//   });
+  describe('Component Filter', () => {
+
+    it('Display Component Filters renders', () => {
+      const wrapper = shallowMount(Filter);
+      expect(wrapper.find('#filter-component').exists()).toBe(true); // Memastikan elemen utama ada
+    });
+  });
 
   describe('Component Explanation', () => {
     it('Display Component Explanation renders', () => {
