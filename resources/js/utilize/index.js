@@ -6,7 +6,7 @@ export const getDataProduct = () => {
 export const utilize = {
   formatedNumber (number, format = '.'){
     if(number){
-      const formattedNumber = number?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, format);
+      const formattedNumber = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, format);
       return formattedNumber;
     } 
     return number;

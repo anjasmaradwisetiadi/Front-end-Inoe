@@ -67,42 +67,42 @@ const filterProductStore = useFilterProductStore();
 // const selectedFilterProductType = 'Sandscreen';
 
 onMounted(()=>{
-  initialize(true);
+  initialize();
 });
 
 const getLoading = ref(false);
 
 const selectedFilterProductType = computed(()=>{
-  return filterProductStore?.selectedFilterProductType;
+  return filterProductStore.selectedFilterProductType;
 });
 
 const filterOptionsProductType = computed(()=>{
-  return filterProductStore?.filterOptionsProductType;
+  return filterProductStore.filterOptionsProductType;
 });
 
 const selectedFilterSize = computed(()=>{
-  return filterProductStore?.selectedFilterSize;
+  return filterProductStore.selectedFilterSize;
 });
 
 const filterOptionsSize = computed(()=>{
-  return filterProductStore?.filterOptionsSize;
+  return filterProductStore.filterOptionsSize;
 });
 
 const selectedFilterGrade = computed(()=>{
-  return filterProductStore?.selectedFilterGrade;
+  return filterProductStore.selectedFilterGrade;
 });
 
 const filterOptionsGrade = computed(()=>{
-  return filterProductStore?.filterOptionsGrade;
+  return filterProductStore.filterOptionsGrade;
 });
 
 const selectedFilterConnection = computed(()=>{
-  return filterProductStore?.selectedFilterConnection;
+  return filterProductStore.selectedFilterConnection;
 });
 
 
 const filterOptionsConnection = computed(()=>{
-  return filterProductStore?.filterOptionsConnection;
+  return filterProductStore.filterOptionsConnection;
 });
 
 
@@ -116,7 +116,10 @@ const getAllProduct = async () => {
   }
 };
 
+
 const initialize = async (withLoader = false)=> {
+  const res = await getAllProduct();
+
   if (withLoader) {
     await setTimeout(() => {
       // console.log('masuk sini timeout = ');
@@ -124,21 +127,20 @@ const initialize = async (withLoader = false)=> {
     }, 1000);
   }
   
-
-  const res = await getAllProduct();
   const body = {};
-  
-  if (selectedFilterProductType !== '') {
-    body['product_type'] = selectedFilterProductType;
+
+  console.log('selectedFilterProductType value = ', selectedFilterProductType);
+  if (selectedFilterProductType.value !== '') {
+    body['product_type'] = selectedFilterProductType.value;
   }
-  if (selectedFilterSize !== '') {
-    body['size'] = selectedFilterSize;
+  if (selectedFilterSize.value !== '') {
+    body['size'] = selectedFilterSize.value;
   }
-  if (selectedFilterGrade !== '') {
-    body['grade'] = selectedFilterGrade;
+  if (selectedFilterGrade.value !== '') {
+    body['grade'] = selectedFilterGrade.value;
   }
-  if (selectedFilterConnection !== '') {
-    body['connection'] = selectedFilterConnection;
+  if (selectedFilterConnection.value !== '') {
+    body['connection'] = selectedFilterConnection.value;
   }
 
   const resFilterData = filterData(res, body);
@@ -182,15 +184,27 @@ function onHandleSelectdata (event){
   initialize(true);
 }
 function onHandleResetdata (event){
-  console.log('onHandleResetdata = ');
-  console.log(event);
+  if (event.category === '1') {
+    filterProductStore?.setSelectedFilterProductType('');
+  }
+  if (event.category === '2') {
+    filterProductStore?.setSelectedOptionsSize('');
+  }
+  if (event.category === '3') {
+    filterProductStore?.setSelectedOptionsGrade('');
+  }
+  if (event.category === '4') {
+    filterProductStore?.setSelectedOptionsConnection('');
+  }
+
+  initialize(true);
 }
 
 
 function onHandleFilterListItem (event){
   const valueSearch = new RegExp(event.value, 'i');
   if (event.category === '1') {
-    const filtered = filterOptionsProductType.filter((item) => {
+    const filtered = filterOptionsProductType.value.filter((item) => {
       return valueSearch.test(item.product_type);
     });
 
@@ -199,7 +213,7 @@ function onHandleFilterListItem (event){
     }
   }
   if (event.category === '2') {
-    const filtered = filterOptionsSize.filter((item) => {
+    const filtered = filterOptionsSize.value.filter((item) => {
       return valueSearch.test(item.size);
     });
 
@@ -208,7 +222,7 @@ function onHandleFilterListItem (event){
     }
   }
   if (event.category === '3') { 
-    const filtered = filterOptionsGrade.filter((item) => {
+    const filtered = filterOptionsGrade.value.filter((item) => {
       return valueSearch.test(item.grade);
     });
 
@@ -217,7 +231,7 @@ function onHandleFilterListItem (event){
     }
   }
   if (event.category === '4') {
-    const filtered = filterOptionsConnection.filter((item) => {
+    const filtered = filterOptionsConnection.value.filter((item) => {
       return valueSearch.test(item.connection);
     });
 
@@ -256,7 +270,6 @@ function filterData (data, paramFilter) {
   });
 
   const combinedData = [...filteredData, ...modifiedNotFilteredData];
-
   return combinedData;
 }
 
@@ -276,8 +289,6 @@ function getDataProductType (data) {
     product_type: productType,
     total_qty: productTypeQtySum[productType]
   }));
-  console.log('SET_FILTER_OPTIONS_PRODUCT_TYPE access = ');
-  console.log(productTypeQtyArray);
 
   return productTypeQtyArray;
 }

@@ -1,4 +1,7 @@
 import { defineStore } from 'pinia';
+// import instanceAxios from '../../utilize/InitializeAxios';
+// import { getProducts } from '../../utilize/index';
+
 
 export const useFilterProductStore = defineStore('filterProduct', {
   state: () =>{
@@ -10,13 +13,12 @@ export const useFilterProductStore = defineStore('filterProduct', {
       selectedFilterSize: '',
       filterOptionsGrade: [],
       selectedFilterGrade: '',
-      selectedFilterConnection: '',
-      filterOptionsConnection: []
+      filterOptionsConnection: [],
+      selectedFilterConnection: ''
     };
   },
 
   actions: {
-
     setFilterOptionsProductType (payload){
       this.filterOptionsProductType = payload;
     },

@@ -1,0 +1,31 @@
+[
+    {
+        "id": 1,
+        "code": "PS-11111",
+        "item_id": "1",
+        "qty": "283",
+        "qty_unit": "Ea",
+        "country_name": "Indonesia",
+        "item_code": "OCTG-0134",
+        "item_desc": "30\", 456.67 PPF, X56, PSL3, LYNX HDHT, R3",
+        "product_type": "Casing",
+        "grade": "API 5L X60",
+        "connection": "Conductor",
+        "size": "30"
+       },
+       {
+        "id": 2,
+        "code": "PS-11711",
+        "item_id": "3",
+        "qty": "216",
+        "qty_unit": "Jts",
+        "country_name": "Australia",
+        "item_code": "40664893",
+        "item_desc": "Sandscreen 5 1\/2\", 17 PPF, JFE-13CR-80, PSL1, JFEBEAR, R3",
+        "product_type": "Sandscreen",
+        "grade": "JFE-13CR-80",
+        "connection": "Threaded & Coupled",
+        "size": "5 1\/2"
+       }
+
+  ]

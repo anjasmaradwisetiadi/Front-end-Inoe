@@ -61,4 +61,5 @@ mix.js('resources/js/app.js', 'public/js')
     require('tailwindcss')
   ])
   .copy('./node_modules/material-symbols/index.scss', 'public/css/material-symbols.min.css')
+  .copy('resources/mockup/file.json', 'public/mockup/file.json')
   .sourceMaps();
