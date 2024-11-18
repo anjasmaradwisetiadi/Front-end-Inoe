@@ -1,6 +1,9 @@
 <!-- eslint-disable max-len vue/no-v-html -->
 <template>
-  <div id="filter-component">
+  <div
+    id="filter-component" 
+    :data-test-id="`filter-component-`+props?.category"
+  >
     <div
       class="w-full bg-gray-100 border border-gray-300 text-gray-500 focus:ring-4 focus:outline-none focus:ring-white font-medium rounded-lg text-sm px-4 py-5 items-center"
     >
