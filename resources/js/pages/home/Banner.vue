@@ -12,7 +12,10 @@
         <div class="text-center">
           <div class="container px-4 mx-auto mt-44">
             <div class="max-w-4xl mx-auto text-center">
-              <h2 class="mt-8 mb-6 text-4xl lg:text-5xl font-bold text-gray-100">
+              <h2
+                id="title-banner"
+                class="mt-8 mb-6 text-4xl lg:text-5xl font-bold text-gray-100"
+              >
                 Your global marketplace to
               </h2>
               <h2 class="mt-8 mb-6 text-4xl lg:text-5xl font-bold text-yellow-600">

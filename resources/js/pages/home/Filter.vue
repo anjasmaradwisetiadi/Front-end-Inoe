@@ -1,11 +1,12 @@
 <!-- eslint-disable max-len vue/no-v-html -->
 <template>
-  <div>
+  <div id="filter-component">
     <div
       class="w-full bg-gray-100 border border-gray-300 text-gray-500 focus:ring-4 focus:outline-none focus:ring-white font-medium rounded-lg text-sm px-4 py-5 items-center"
     >
       <div
         class="flex justify-between z-0 cursor-pointer px-1 py-1 border-2 border-lg shadow"
+        data-test-id="click-handle"
         @click="onHandleVisibleDropdown"
       >
         <span>{{ props?.title }} </span>
@@ -130,8 +131,8 @@
   
 <script setup>
 import { ref, defineEmits, defineProps, onBeforeMount } from 'vue';
-import { utilize } from '@utilize/index';
-import useEmitter from '@utilize/useEventBus';
+import { utilize } from '../../utilize/index';
+import useEmitter from '../../utilize/useEventBus';
 
 const emitter = useEmitter();
 const visibleDropdown = ref(false); 
