@@ -16,6 +16,33 @@
               @onResetData="onHandleResetdata($event)"
               @filterListItem="onHandleFilterListItem($event)"
             />
+            <Filter
+              category="2"
+              title="Size"
+              :selected-value="selectedFilterSize"
+              :options="filterOptionsSize"
+              @onSelectData="onHandleSelectdata($event)"
+              @onResetData="onHandleResetdata($event)"
+              @filterListItem="onHandleFilterListItem($event)"
+            />
+            <Filter
+              category="3"
+              title="Grade"
+              :selected-value="selectedFilterGrade"
+              :options="filterOptionsGrade"
+              @onSelectData="onHandleSelectdata($event)"
+              @onResetData="onHandleResetdata($event)"
+              @filterListItem="onHandleFilterListItem($event)"
+            />
+            <Filter
+              category="4"
+              title="Connection"
+              :selected-value="selectedFilterConnection"
+              :options="filterOptionsConnection"
+              @onSelectData="onHandleSelectdata($event)"
+              @onResetData="onHandleResetdata($event)"
+              @filterListItem="onHandleFilterListItem($event)"
+            />
           </div>
         </div>
       </div>  
@@ -35,44 +62,45 @@ import { getDataProduct } from '@utilize/index';
 const filterProductStore = useFilterProductStore();
 
 // const selectedFilterProductType = 'Sandscreen';
-const filterOptionsProductType = [ 
-  {
-    product_type: 'Casing',
-    total_qty: 6106956
-  },
-  {
-    product_type: 'Sandscreen',
-    total_qty: 18579
-  },
-  {
-    product_type: 'Pup Joint',
-    total_qty: 8530
-  },
-  {
-    product_type: 'Coupling',
-    total_qty: 2049779
-  }
-];
 
 onMounted(()=>{
   initialize();
 });
 
+
 const selectedFilterProductType = computed(()=>{
   return filterProductStore?.selectedFilterProductType;
+});
+
+const filterOptionsProductType = computed(()=>{
+  return filterProductStore?.filterOptionsProductType;
 });
 
 const selectedFilterSize = computed(()=>{
   return filterProductStore?.selectedFilterSize;
 });
 
+const filterOptionsSize = computed(()=>{
+  return filterProductStore?.filterOptionsSize;
+});
+
 const selectedFilterGrade = computed(()=>{
-  return filterProductStore?.selectedFilterSize;
+  return filterProductStore?.selectedFilterGrade;
+});
+
+const filterOptionsGrade = computed(()=>{
+  return filterProductStore?.filterOptionsGrade;
 });
 
 const selectedFilterConnection = computed(()=>{
   return filterProductStore?.selectedFilterConnection;
 });
+
+
+const filterOptionsConnection = computed(()=>{
+  return filterProductStore?.filterOptionsConnection;
+});
+
 
 const getLoading = ref(false);
 
@@ -113,20 +141,37 @@ const initialize = async (withLoader = false)=> {
     body['connection'] = selectedFilterConnection;
   }
 
+  console.log('res = ');
+  console.log(res);
+
+  
+  console.log('body = ');
+  console.log(body);
+
   const resFilterData = filterData(res, body);
+
 
   const resDataProductType = getDataProductType(resFilterData);
   console.log('resDataProductType = ');
   console.log(resDataProductType);
   // make store setFilterOptionsProductType
 
-  // const resDatasSize = getDataSize(resFilterData);
+  const resDatasSize = getDataSize(resFilterData);
+  console.log('resDatasSize = ');
+  console.log(resDatasSize);
   // make store setFilterOptionsSize
 
-  // const resDataGrade = getDataGrade(resFilterData);
+  console.log('filterOptionsGrade = ');
+  console.log(filterOptionsGrade);
+
+  const resDataGrade = getDataGrade(resFilterData);
+  console.log('resDataGrade = ');
+  console.log(resDataGrade);
   // make store setFilterOptionsGrade
 
-  // const resDataConnection = getDataConnection(resFilterData);
+  const resDataConnection = getDataConnection(resFilterData);
+  console.log('resDataConnection = ');
+  console.log(resDataConnection);
   // make store setFilterOptionsConnection
 
 
@@ -209,20 +254,61 @@ function getDataProductType (data) {
 }
 
 function getDataSize (data){
-  console.log('getDataSize = ');
-  console.log(data);
-  return data;
+  const sizeQtySum = data.reduce((acc, curr) => {
+    if (acc[curr.size]) {
+      acc[curr.size] += parseInt(curr.qty);
+    }
+    else {
+      acc[curr.size] = parseInt(curr.qty);
+    }
+    return acc;
+  }, {});
+
+  const sizeQtyArray = Object.keys(sizeQtySum).map((size) => ({
+    size,
+    total_qty: sizeQtySum[size]
+  }));
+
+  return sizeQtyArray;
 }
 
 function getDataGrade (data){
+  const gradeQtySum = data.reduce((acc, curr) => {
+    if (acc[curr.grade]) {
+      acc[curr.grade] += parseInt(curr.qty);
+    }
+    else {
+      acc[curr.grade] = parseInt(curr.qty);
+    }
+    return acc;
+  }, {});
+
+  const gradeQtyArray = Object.keys(gradeQtySum).map((grade) => ({
+    grade,
+    total_qty: gradeQtySum[grade]
+  }));
   console.log('getDataGrade = ');
-  console.log(data);
-  return data;
+  console.log(gradeQtyArray);
+  return gradeQtyArray;
 }
 function getDataConnection (data){
-  console.log('getDataConnection = ');
-  console.log(data);
-  return data;
+  const connectionQtySum = data.reduce((acc, curr) => {
+    if (acc[curr.connection]) {
+      acc[curr.connection] += parseInt(curr.qty);
+    }
+    else {
+      acc[curr.connection] = parseInt(curr.qty);
+    }
+    return acc;
+  }, {});
+
+  const connectionQtyArray = Object.keys(connectionQtySum).map((connection) => ({
+    connection,
+    total_qty: connectionQtySum[connection]
+  }));
+  console.log('connectionQtyArray = ');
+  console.log(connectionQtyArray);
+  return connectionQtyArray;
 }
 
 
