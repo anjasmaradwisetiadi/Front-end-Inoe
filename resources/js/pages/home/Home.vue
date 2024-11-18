@@ -1,9 +1,7 @@
 <template>
   <div class="w-full">
-    <div>
-      Wellcome, this page will show to all user dada
-    </div>
-    <section class="w-full">
+    <Banner />
+    <section class="w-full bg-gray-100">
       <div class="container mx-auto flex flex-col lg:flex-row gap-4">
         <div class="w-full bg-white border border-gray-200 shadow-md rounded-lg p-4 -mt-8 z-10 oveflow-hidden h-36">
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -47,9 +45,8 @@
         </div>
       </div>  
     </section>
-    <div>
-      nilai {{ getLoading }}
-    </div>
+    <Explanation />
+    <FormQuestion />
     <!-- <template v-if="getLoading">
       <Loading />
     </template> -->
@@ -58,6 +55,9 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import Filter from './Filter.vue';
+import Banner from './Banner.vue';
+import Explanation from './Explanation.vue';
+import FormQuestion from './FormQuestion.vue';
 // import Loading from '@components/Loading.vue';
 import { useFilterProductStore } from '@store/filter/FilterProduct';
 import { getDataProduct } from '@utilize/index';
