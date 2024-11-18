@@ -72,7 +72,6 @@
           >
         </div>
       </div>
-  
       <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700">
         <li
           v-for="(item, i) in props?.options"

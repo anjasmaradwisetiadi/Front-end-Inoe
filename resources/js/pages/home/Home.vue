@@ -145,16 +145,17 @@ const initialize = async (withLoader = false)=> {
 
   const resFilterData = filterData(res, body);
 
-  const resDataProductType = getDataProductType(resFilterData);
+  const resDataProductType = filterProductStore.setMapDataProductType(resFilterData);
   filterProductStore?.setFilterOptionsProductType(resDataProductType);
 
-  const resDatasSize = getDataSize(resFilterData);
+  const resDatasSize = filterProductStore.setMapDataSize(resFilterData);
   filterProductStore?.setFilterOptionsSize(resDatasSize);
 
-  const resDataGrade = getDataGrade(resFilterData);
+  const resDataGrade = filterProductStore.setMapDataGrade(resFilterData);
+
   filterProductStore?.setFilterOptionsGrade(resDataGrade);
 
-  const resDataConnection = getDataConnection(resFilterData);
+  const resDataConnection =  filterProductStore.setMapDataConnection(resFilterData);
   filterProductStore?.setFilterOptionsConnection(resDataConnection);
 
   console.log('sudah sampai sini initialize -------- ');
@@ -272,80 +273,5 @@ function filterData (data, paramFilter) {
   const combinedData = [...filteredData, ...modifiedNotFilteredData];
   return combinedData;
 }
-
-//******** */ get data product type mapping
-function getDataProductType (data) {
-  const productTypeQtySum = data.reduce((acc, curr) => {
-    if (acc[curr.product_type]) {
-      acc[curr.product_type] += parseInt(curr.qty);
-    }
-    else {
-      acc[curr.product_type] = parseInt(curr.qty);
-    }
-    return acc;
-  }, {});
-
-  const productTypeQtyArray = Object.keys(productTypeQtySum).map((productType) => ({
-    product_type: productType,
-    total_qty: productTypeQtySum[productType]
-  }));
-
-  return productTypeQtyArray;
-}
-
-function getDataSize (data){
-  const sizeQtySum = data.reduce((acc, curr) => {
-    if (acc[curr.size]) {
-      acc[curr.size] += parseInt(curr.qty);
-    }
-    else {
-      acc[curr.size] = parseInt(curr.qty);
-    }
-    return acc;
-  }, {});
-
-  const sizeQtyArray = Object.keys(sizeQtySum).map((size) => ({
-    size,
-    total_qty: sizeQtySum[size]
-  }));
-
-  return sizeQtyArray;
-}
-
-function getDataGrade (data){
-  const gradeQtySum = data.reduce((acc, curr) => {
-    if (acc[curr.grade]) {
-      acc[curr.grade] += parseInt(curr.qty);
-    }
-    else {
-      acc[curr.grade] = parseInt(curr.qty);
-    }
-    return acc;
-  }, {});
-
-  const gradeQtyArray = Object.keys(gradeQtySum).map((grade) => ({
-    grade,
-    total_qty: gradeQtySum[grade]
-  }));
-  return gradeQtyArray;
-}
-function getDataConnection (data){
-  const connectionQtySum = data.reduce((acc, curr) => {
-    if (acc[curr.connection]) {
-      acc[curr.connection] += parseInt(curr.qty);
-    }
-    else {
-      acc[curr.connection] = parseInt(curr.qty);
-    }
-    return acc;
-  }, {});
-
-  const connectionQtyArray = Object.keys(connectionQtySum).map((connection) => ({
-    connection,
-    total_qty: connectionQtySum[connection]
-  }));
-  return connectionQtyArray;
-}
-
 
 </script>

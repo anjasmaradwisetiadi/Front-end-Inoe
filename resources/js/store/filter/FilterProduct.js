@@ -43,12 +43,87 @@ export const useFilterProductStore = defineStore('filterProduct', {
     },
 
     setFilterOptionsConnection (payload){
-      this.filterOptionsGrade = payload;
+      this.filterOptionsConnection = payload;
     },
 
     setSelectedOptionsConnection (payload){
       this.selectedFilterConnection = payload;
+    },
+
+    //******** */ get data product, size, grade, connection type mapping
+    setMapDataProductType (data){
+      const productTypeQtySum = data.reduce((acc, curr) => {
+        if (acc[curr.product_type]) {
+          acc[curr.product_type] += parseInt(curr.qty);
+        }
+        else {
+          acc[curr.product_type] = parseInt(curr.qty);
+        }
+        return acc;
+      }, {});
+    
+      const productTypeQtyArray = Object.keys(productTypeQtySum).map((productType) => ({
+        product_type: productType,
+        total_qty: productTypeQtySum[productType]
+      }));
+    
+      return productTypeQtyArray;
+    },
+
+    setMapDataSize (data){
+      const sizeQtySum = data.reduce((acc, curr) => {
+        if (acc[curr.size]) {
+          acc[curr.size] += parseInt(curr.qty);
+        }
+        else {
+          acc[curr.size] = parseInt(curr.qty);
+        }
+        return acc;
+      }, {});
+    
+      const sizeQtyArray = Object.keys(sizeQtySum).map((size) => ({
+        size,
+        total_qty: sizeQtySum[size]
+      }));
+    
+      return sizeQtyArray;
+    },
+    setMapDataGrade (data){
+      const gradeQtySum = data.reduce((acc, curr) => {
+        if (acc[curr.grade]) {
+          acc[curr.grade] += parseInt(curr.qty);
+        }
+        else {
+          acc[curr.grade] = parseInt(curr.qty);
+        }
+        return acc;
+      }, {});
+    
+      const gradeQtyArray = Object.keys(gradeQtySum).map((grade) => ({
+        grade,
+        total_qty: gradeQtySum[grade]
+      }));
+      return gradeQtyArray;
+    },
+
+    setMapDataConnection (data){
+      const connectionQtySum = data.reduce((acc, curr) => {
+        if (acc[curr.connection]) {
+          acc[curr.connection] += parseInt(curr.qty);
+        }
+        else {
+          acc[curr.connection] = parseInt(curr.qty);
+        }
+        return acc;
+      }, {});
+    
+      const connectionQtyArray = Object.keys(connectionQtySum).map((connection) => ({
+        connection,
+        total_qty: connectionQtySum[connection]
+      }));
+      return connectionQtyArray;
     }
+
   },
 
   getters: {
