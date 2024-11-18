@@ -5,8 +5,11 @@ export const getDataProduct = () => {
 
 export const utilize = {
   formatedNumber (number, format = '.'){
-    const formattedNumber = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, format);
-    return formattedNumber;
+    if(number){
+      const formattedNumber = number?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, format);
+      return formattedNumber;
+    } 
+    return number;
   },
   formatRupiah (value){
     return new Intl.NumberFormat('id-ID', {

@@ -192,7 +192,7 @@ function onHandleSelectItem (category, data) {
     data
   });
   
-  this.onHandleVisibleDropdown();
+  onHandleVisibleDropdown();
 }
 
 function onHandleFilterListItem () {

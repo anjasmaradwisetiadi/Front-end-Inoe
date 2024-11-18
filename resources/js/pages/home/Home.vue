@@ -47,15 +47,18 @@
         </div>
       </div>  
     </section>
-    <template v-if="getLoading">
+    <div>
+      nilai {{ getLoading }}
+    </div>
+    <!-- <template v-if="getLoading">
       <Loading />
-    </template>
+    </template> -->
   </div>
 </template>
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import Filter from './Filter.vue';
-import Loading from '@components/Loading.vue';
+// import Loading from '@components/Loading.vue';
 import { useFilterProductStore } from '@store/filter/FilterProduct';
 import { getDataProduct } from '@utilize/index';
 
@@ -64,9 +67,10 @@ const filterProductStore = useFilterProductStore();
 // const selectedFilterProductType = 'Sandscreen';
 
 onMounted(()=>{
-  initialize();
+  initialize(true);
 });
 
+const getLoading = ref(false);
 
 const selectedFilterProductType = computed(()=>{
   return filterProductStore?.selectedFilterProductType;
@@ -102,8 +106,6 @@ const filterOptionsConnection = computed(()=>{
 });
 
 
-const getLoading = ref(false);
-
 const getAllProduct = async () => {
   try {
     let response = await getDataProduct();
@@ -116,18 +118,16 @@ const getAllProduct = async () => {
 
 const initialize = async (withLoader = false)=> {
   if (withLoader) {
-    setTimeout(() => {
-      getLoading.value = true;
+    await setTimeout(() => {
+      // console.log('masuk sini timeout = ');
+      // getLoading.value = true;
     }, 1000);
   }
-
+  
 
   const res = await getAllProduct();
   const body = {};
-
-  console.log('selectedFilterProductType initialize = ');
-  console.log(selectedFilterProductType);
-
+  
   if (selectedFilterProductType !== '') {
     body['product_type'] = selectedFilterProductType;
   }
@@ -141,41 +141,24 @@ const initialize = async (withLoader = false)=> {
     body['connection'] = selectedFilterConnection;
   }
 
-  console.log('res = ');
-  console.log(res);
-
-  
-  console.log('body = ');
-  console.log(body);
-
   const resFilterData = filterData(res, body);
 
-
   const resDataProductType = getDataProductType(resFilterData);
-  console.log('resDataProductType = ');
-  console.log(resDataProductType);
-  // make store setFilterOptionsProductType
+  filterProductStore?.setFilterOptionsProductType(resDataProductType);
 
   const resDatasSize = getDataSize(resFilterData);
-  console.log('resDatasSize = ');
-  console.log(resDatasSize);
-  // make store setFilterOptionsSize
-
-  console.log('filterOptionsGrade = ');
-  console.log(filterOptionsGrade);
+  filterProductStore?.setFilterOptionsSize(resDatasSize);
 
   const resDataGrade = getDataGrade(resFilterData);
-  console.log('resDataGrade = ');
-  console.log(resDataGrade);
-  // make store setFilterOptionsGrade
+  filterProductStore?.setFilterOptionsGrade(resDataGrade);
 
   const resDataConnection = getDataConnection(resFilterData);
-  console.log('resDataConnection = ');
-  console.log(resDataConnection);
-  // make store setFilterOptionsConnection
+  filterProductStore?.setFilterOptionsConnection(resDataConnection);
 
-
+  console.log('sudah sampai sini initialize -------- ');
+  // getLoading.value = false;
   if (withLoader) {
+    // console.log('bisa masuk sini');
     getLoading.value = false;
   }
 };
@@ -183,8 +166,20 @@ const initialize = async (withLoader = false)=> {
 
 // ********* start submit Fliter function handle
 function onHandleSelectdata (event){
-  console.log('onHandleSelectdata = ');
-  console.log(event);
+  if (event.category === '1') {
+    filterProductStore?.setSelectedFilterProductType(event.data.product_type);
+  }
+  if (event.category === '2') {
+    filterProductStore?.setSelectedOptionsSize(event.data.size);
+  }
+  if (event.category === '3') {
+    filterProductStore?.setSelectedOptionsGrade(event.data.grade);
+  }
+  if (event.category === '4') {
+    filterProductStore?.setSelectedOptionsConnection(event.data.connection);
+  }
+
+  initialize(true);
 }
 function onHandleResetdata (event){
   console.log('onHandleResetdata = ');
@@ -193,17 +188,51 @@ function onHandleResetdata (event){
 
 
 function onHandleFilterListItem (event){
-  console.log('onHandleFilterListItem = ');
-  console.log(event);
+  const valueSearch = new RegExp(event.value, 'i');
+  if (event.category === '1') {
+    const filtered = filterOptionsProductType.filter((item) => {
+      return valueSearch.test(item.product_type);
+    });
+
+    if (filtered.length > 0) {
+      filterProductStore?.setFilterOptionsProductType(filtered);
+    }
+  }
+  if (event.category === '2') {
+    const filtered = filterOptionsSize.filter((item) => {
+      return valueSearch.test(item.size);
+    });
+
+    if (filtered.length > 0) {
+      filterProductStore?.setFilterOptionsSize(filtered);
+    }
+  }
+  if (event.category === '3') { 
+    const filtered = filterOptionsGrade.filter((item) => {
+      return valueSearch.test(item.grade);
+    });
+
+    if (filtered.length > 0) {
+      filterProductStore?.setFilterOptionsGrade(filtered);
+    }
+  }
+  if (event.category === '4') {
+    const filtered = filterOptionsConnection.filter((item) => {
+      return valueSearch.test(item.connection);
+    });
+
+    if (filtered.length > 0) {
+      filterProductStore?.setFilterOptionsConnection(filtered);
+    }
+  }
+  if (event.value === '') {
+    initialize();
+  }
 }
 
 // ********* end submit Fliter function handle
 
 function filterData (data, paramFilter) {
-  console.log('data = ');
-  console.log(data);
-  console.log('paramFilter = ');
-  console.log(paramFilter);
   let filterCriteria = paramFilter;
 
   const applyFilter = (data, criteria) => {
@@ -287,8 +316,6 @@ function getDataGrade (data){
     grade,
     total_qty: gradeQtySum[grade]
   }));
-  console.log('getDataGrade = ');
-  console.log(gradeQtyArray);
   return gradeQtyArray;
 }
 function getDataConnection (data){
@@ -306,8 +333,6 @@ function getDataConnection (data){
     connection,
     total_qty: connectionQtySum[connection]
   }));
-  console.log('connectionQtyArray = ');
-  console.log(connectionQtyArray);
   return connectionQtyArray;
 }
 
