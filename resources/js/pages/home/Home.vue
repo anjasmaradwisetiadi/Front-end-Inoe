@@ -5,7 +5,7 @@
     </div>
     <section class="w-full">
       <div class="container mx-auto flex flex-col lg:flex-row gap-4">
-        <div class="w-full bg-white border border-gray-200 shadow-md rounded-lg p-4 -mt-8 z-10 oveflow-hidden h-28">
+        <div class="w-full bg-white border border-gray-200 shadow-md rounded-lg p-4 -mt-8 z-10 oveflow-hidden h-36">
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <Filter
               category="1"
@@ -152,7 +152,6 @@ const initialize = async (withLoader = false)=> {
   filterProductStore?.setFilterOptionsSize(resDatasSize);
 
   const resDataGrade = filterProductStore.setMapDataGrade(resFilterData);
-
   filterProductStore?.setFilterOptionsGrade(resDataGrade);
 
   const resDataConnection =  filterProductStore.setMapDataConnection(resFilterData);
