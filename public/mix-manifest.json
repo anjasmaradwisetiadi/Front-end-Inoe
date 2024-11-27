@@ -2,5 +2,6 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/material-symbols.min.css": "/css/material-symbols.min.css",
+    "/mockup/DataProduct.json": "/mockup/DataProduct.json",
     "/mockup/file.json": "/mockup/file.json"
 }

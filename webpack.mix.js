@@ -1,7 +1,6 @@
 const mix = require('laravel-mix');
 const webpack = require('webpack');
 const path = require('path');
-const tailwindcss = require('tailwindcss');
 
 /*
  |--------------------------------------------------------------------------
@@ -61,5 +60,5 @@ mix.js('resources/js/app.js', 'public/js')
     require('tailwindcss')
   ])
   .copy('./node_modules/material-symbols/index.scss', 'public/css/material-symbols.min.css')
-  .copy('resources/mockup/file.json', 'public/mockup/file.json')
+  .copy('resources/mockup', 'public/mockup')
   .sourceMaps();

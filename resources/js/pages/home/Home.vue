@@ -262,6 +262,11 @@ function filterData (data, paramFilter) {
 
   const filteredData = applyFilter(data, filterCriteria);
   const notFilteredData = data.filter((item) => !applyFilter([item], filterCriteria).length);
+  // console.log('filteredData = ');
+  // console.log(filteredData);
+  
+  // console.log('notFilteredData = ');
+  // console.log(notFilteredData);
   const modifiedNotFilteredData = notFilteredData.map((item) => {
     return { ...item, qty: 0 };
   });
