@@ -129,8 +129,6 @@ const initialize = async (withLoader = false)=> {
   }
   
   const body = {};
-
-  console.log('selectedFilterProductType value = ', selectedFilterProductType);
   if (selectedFilterProductType.value !== '') {
     body['product_type'] = selectedFilterProductType.value;
   }
@@ -157,8 +155,6 @@ const initialize = async (withLoader = false)=> {
 
   const resDataConnection =  filterProductStore.setMapDataConnection(resFilterData);
   filterProductStore?.setFilterOptionsConnection(resDataConnection);
-
-  console.log('sudah sampai sini initialize -------- ');
   // getLoading.value = false;
   if (withLoader) {
     // console.log('bisa masuk sini');
