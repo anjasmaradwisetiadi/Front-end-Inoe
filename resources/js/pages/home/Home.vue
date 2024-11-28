@@ -58,7 +58,7 @@ import Filter from './Filter.vue';
 import Banner from './Banner.vue';
 import Explanation from './Explanation.vue';
 import FormQuestion from './FormQuestion.vue';
-// import Loading from '@components/Loading.vue';
+import Loading from '@components/Loading.vue';
 import { useFilterProductStore } from '@store/filter/FilterProduct';
 import { getDataProduct } from '@utilize/index';
 
@@ -120,29 +120,31 @@ const getAllProduct = async () => {
 
 const initialize = async (withLoader = false)=> {
   const res = await getAllProduct();
+  let loadingGet = false;
   if (withLoader) {
-    clearTimeout(debounce.value);
     debounce.value = setTimeout(() => {
       // console.log('masuk sini timeout = ');
-      getLoading.value = true;
+      loadingGet = true;
+      getLoading.value = loadingGet;
     }, 1000);
-  }
-  
-  const body = {};
-  if (selectedFilterProductType.value !== '') {
-    body['product_type'] = selectedFilterProductType.value;
-  }
-  if (selectedFilterSize.value !== '') {
-    body['size'] = selectedFilterSize.value;
-  }
-  if (selectedFilterGrade.value !== '') {
-    body['grade'] = selectedFilterGrade.value;
-  }
-  if (selectedFilterConnection.value !== '') {
-    body['connection'] = selectedFilterConnection.value;
+    clearTimeout(debounce.value);
   }
 
-  const resFilterData = filterData(res, body);
+  const bodyFilter = {};
+  if (selectedFilterProductType.value !== '') {
+    bodyFilter['product_type'] = selectedFilterProductType.value;
+  }
+  if (selectedFilterSize.value !== '') {
+    bodyFilter['size'] = selectedFilterSize.value;
+  }
+  if (selectedFilterGrade.value !== '') {
+    bodyFilter['grade'] = selectedFilterGrade.value;
+  }
+  if (selectedFilterConnection.value !== '') {
+    bodyFilter['connection'] = selectedFilterConnection.value;
+  }
+
+  const resFilterData = filterData(res, bodyFilter);
 
   const resDataProductType = filterProductStore.setMapDataProductType(resFilterData);
   filterProductStore?.setFilterOptionsProductType(resDataProductType);
@@ -155,10 +157,8 @@ const initialize = async (withLoader = false)=> {
 
   const resDataConnection =  filterProductStore.setMapDataConnection(resFilterData);
   filterProductStore?.setFilterOptionsConnection(resDataConnection);
-  // getLoading.value = false;
-  if (withLoader) {
-    // console.log('bisa masuk sini');
-    getLoading.value = false;
+  if(withLoader){
+    getLoading.value =false;
   }
 };
 
@@ -264,7 +264,7 @@ function filterData (data, paramFilter) {
   const notFilteredData = data.filter((item) => !applyFilter([item], filterCriteria).length);
   // console.log('filteredData = ');
   // console.log(filteredData);
-  
+
   // console.log('notFilteredData = ');
   // console.log(notFilteredData);
   const modifiedNotFilteredData = notFilteredData.map((item) => {

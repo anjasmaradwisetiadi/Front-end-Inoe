@@ -1,7 +1,8 @@
 <template>
   <section 
     id="explanation"
-    class="bg-gray-100 flex items-center justify-center p-6">
+    class="bg-gray-100 flex items-center justify-center p-6"
+  >
     <div class="max-w-5xl bg-white shadow-md rounded-lg overflow-hidden flex">
       <!-- Left: Video Section -->
       <div class="w-1/2 bg-gray-800 relative">

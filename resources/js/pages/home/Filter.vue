@@ -16,7 +16,7 @@
         >
           <span>{{ props?.title }} </span>
 
-          <span class="material-symbols-outlined text-yellow-600">
+          <span class="material-symbols-outlined text-[#fe6602]">
             {{ visibleDropdown ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
           </span>
         </div>
@@ -27,7 +27,7 @@
               class="flex justify-between"
               @click="onClickResetFilter(props?.category)"
             >
-              <span class="font-bold text-yellow-600">
+              <span class="font-bold text-[#fe6602]">
                 {{ props?.selectedValue }}
               </span>
               <span class="material-symbols-outlined text-gray-500">
@@ -36,7 +36,7 @@
             </div>
           </template>
           <template v-else>
-            <span class="font-bold text-yellow-600 uppercase">
+            <span class="font-bold text-[#fe6602] uppercase">
               All
             </span>
           </template>
@@ -100,7 +100,7 @@
                 </span>
               </div>
               <div>
-                <span class="font-bold text-yellow-500">
+                <span class="font-bold text-[#fe6602]">
                   {{ computeFormatQty(item.total_qty) }}
                 </span>
               </div>

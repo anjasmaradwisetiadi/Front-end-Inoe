@@ -18,5 +18,11 @@ export const utilize = {
       minimumFractionDigits: 0, // Tidak menampilkan desimal
       maximumFractionDigits: 0
     }).format(value);
+  },
+
+  sleep (params) {
+    return new Promise((resolve)=>{
+      setTimeout(resolve, params);
+    });
   }
 };

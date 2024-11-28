@@ -1,7 +1,8 @@
 <template>
   <section 
     id="form-question"
-    class="w-full py-8">
+    class="w-full py-8"
+  >
     <div class="container mx-auto flex flex-col bg-[#30405b] rounded-lg gap-4 p-16 py-24">
       <div class="mb-10">
         <div>
