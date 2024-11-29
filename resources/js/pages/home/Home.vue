@@ -117,17 +117,10 @@ const getAllProduct = async () => {
   }
 };
 
-
 const initialize = async (withLoader = false)=> {
   const res = await getAllProduct();
-  let loadingGet = false;
-  if (withLoader) {
-    debounce.value = setTimeout(() => {
-      // console.log('masuk sini timeout = ');
-      loadingGet = true;
-      getLoading.value = loadingGet;
-    }, 1000);
-    clearTimeout(debounce.value);
+  if(withLoader){
+    getLoading.value = true;
   }
 
   const bodyFilter = {};
@@ -157,8 +150,14 @@ const initialize = async (withLoader = false)=> {
 
   const resDataConnection =  filterProductStore.setMapDataConnection(resFilterData);
   filterProductStore?.setFilterOptionsConnection(resDataConnection);
-  if(withLoader){
-    getLoading.value =false;
+
+  if (withLoader) {
+    clearTimeout(debounce.value);
+    debounce.value = setTimeout(() => {
+      // console.log('masuk sini timeout = ');
+
+      getLoading.value = false;
+    }, 1000);
   }
 };
 
